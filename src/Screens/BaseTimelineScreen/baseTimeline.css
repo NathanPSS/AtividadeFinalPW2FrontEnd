@@ -1,0 +1,50 @@
+@media screen and (max-width: 600px) {
+    .panel {
+      display: none;
+    }
+    .n{
+        display: none;
+    }
+  }
+  @media screen and (min-width: 601px){
+   .panel{ 
+    position: absolute;
+    display: flex;
+    width: 40vh;
+    height:1200px;
+    flex-direction: column;
+    border-right-color: white;
+    border-right-width: 2px;
+    margin: 1px;
+   }
+}
+@media screen and (min-width: 601px) {
+    .panel{ 
+     position: absolute;
+     display: flex;
+     width: 350px;
+     height:1200px;
+     flex-direction: column;
+     border-right-color: white;
+     border-right-width: 2px;
+     margin: 1px;
+    }
+    .avatar{
+        position: absolute;
+        width: 275px;
+        height: 60px;
+        margin-left: 30px;
+        margin-top: 3px;
+      
+    }
+ }
+
+.containerProjects{
+    margin-top: 20px;
+    
+}
+
+.containerMyProjects{
+    margin-top: 1vh;
+}
+
