@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 export default function ProjectProfile(){
     const [projectReponse,setProjectResponse] = useState({})
     const [project,setProject] = useState({})
+     const [imagePreviewUrlProfile, setImagePreviewUrlProfile] = useState<string | null>(null);
    
 
     const getProjectData = () =>{

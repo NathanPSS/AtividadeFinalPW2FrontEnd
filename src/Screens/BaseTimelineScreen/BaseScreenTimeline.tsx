@@ -70,7 +70,9 @@ export default function BaseScreenTimeline(){
   localStorage.removeItem('token')
   window.location.href = '/login'
  }
-
+ const handleProfile = () => {
+  window.location.href = '/profile'
+ }
 
  const detailsProject = (id) => {
       window.location.href = `/projectProfile/${id}`
@@ -108,6 +110,10 @@ const editProject = (id) =>{
          
         <div className='panel' style={{position:'fixed'}}>
         <div className='avatar'>
+          <ButtonBase
+          
+          onClick={handleProfile}
+          >
         <Avatar 
         src={imagePreviewUrlProfile}
         sx={{
@@ -116,6 +122,7 @@ const editProject = (id) =>{
           
             position:'relative'
         }}/>
+        </ButtonBase>
         </div>
           <Panel signoutFuction={signout} openModalFuction={toggleVisibility} openProjectFuction={toggleVisibilityProjects}/>
           <CreateProjectButton />

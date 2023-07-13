@@ -9,6 +9,7 @@ import NewProject from "./Screens/NewProject/NewProject";
 import EditProfile from './Screens/EditProfile/EditProfile';
 import ProjectProfile from './Screens/ProjectProfile/ProjectProfile';
 import EditProject from './Screens/EditProject/EditProject';
+import DashboardScreen from './Screens/Dashboard/Dashboard';
 
 
 
@@ -19,7 +20,8 @@ function App() {
       <BrowserRouter>
 
         <Routes>
-          <Route path="/profile" element={<ProtectedRoute path="/profile" element={<ProfileScreen />} />} />
+          <Route path='/' element={<DashboardScreen />} />
+          <Route path="/profile/*" element={<ProtectedRoute path="/" element={<ProfileScreen />} />} />
           <Route path="/cadastro" element={<SingInScreen />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path='/criarProjeto' element={<NewProject />} />

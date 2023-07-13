@@ -3,20 +3,57 @@ import './profileScreen.css'
 import ProfileText from '../../components/ProfileText/ProfileText'
 import ProjectTimeline from '../../components/ProjectTimeline/ProjectTimeline'
 import { position } from '@chakra-ui/react'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+
+
+
+
+
 
 export default function ProfileScreen(){
+  const[user,setUser] = useState({})
+  const [imagePreviewUrlProfile, setImagePreviewUrlProfile] = useState<string | null>(null);
+
+const getUserInfo =async () =>{
+  const response = await axios.get('http://localhost:3000/user',{
+   headers:{
+     Authorization:`Bearer ${localStorage.getItem('token')}`
+   }
+  })
+  .then(response =>{
+   setUser(response.data)
+   console.log(response.data)
+  })
+}
+useEffect(() =>{
+    
+  setImagePreviewUrlProfile(user.profile?.firebaseUrlFile ? user.profile.firebaseUrlFile : null)
+
+},[user])
+
+  useEffect(() =>{
+     getUserInfo()
+  },[])
     return(
-    <>
-        
-        <Grid container spacing={2} >
-      <Grid item xs={12} sm={6} md={4}>
-    <Box position='absolute' display='flex' flexDirection='row' height={'100%'}>
+    
+          <Box sx={{
+            position:'absolute',
+            backgroundColor:'black',
+            display:'flex',
+            width:'100%',
+            height:'100%',
+            justifyContent:'center',
+            overflowY:'scroll'
+         }}>
+    <Box position='relative' display='flex' flexDirection='row' height={'100%'}>
       <Box
       sx={{
-        borderRightWidth:'1px',
-        borderRightColor:'#FFFFFF',
-        width:'70vh',
+       alignSelf:'center',
+       alignContent:'center',
+        width:'100%',
         display:'flex',
+        justifyContent:'center',
         flexDirection:'row',
         height:'100%'
       }}
@@ -25,10 +62,12 @@ export default function ProfileScreen(){
             display:'flex',
             flexDirection:'column',
             margin:'5vh',
-            width:'65vh',
+            width:'100%',
          
         }} >
-            <Avatar sx={{
+            <Avatar 
+            src={imagePreviewUrlProfile}
+            sx={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -36,9 +75,16 @@ export default function ProfileScreen(){
                 width:'24vh',
                 height:'24vh'
             }} />
-          <Box>
-            <ProfileText title='Nome' content='Rodigro Faro Silva'/>
-            <ProfileText title='Email' content='rodigrofaro@gmail.com'/>
+          <Box
+          sx={{
+            width:'100%'
+          }}
+          >
+            <ProfileText title='Nome' content={user.name}/>
+            <ProfileText title='Sobrenome' content={user.lastName}/>
+            <ProfileText title='Contato' content={user.phone}/>
+            <ProfileText title='GitHub' content={user.github}/>
+            <ProfileText title='Bio' content={user.bio}/>
           </Box>
           <Box sx={{
 
@@ -46,32 +92,8 @@ export default function ProfileScreen(){
           </Box>
         </Box>
       </Box>
-    
     </Box>
-    </Grid>
-    </Grid>
-    <Grid container spacing={2} marginLeft={70}>
-      <Grid item xs={12} sm={6} md={8}>
-    <Box  sx={{
-        marginTop:'2vh',
-        right:'10vh',
-        width:'90vh',
-        display:'flex',
-        height:'100%',
-        position:'absolute'
-      }}>
-       <ProjectTimeline avatar={false} sx={{
-        width:'80vh',
-        height:'20vh',
-        position:'relative',
-        backgroundColor:'black',
-        borderColor:'white',
-        borderWidth:'2px'
-    }} />
     </Box>
-    </Grid>
-    </Grid>
-    </>
     )
 }
- 
+
